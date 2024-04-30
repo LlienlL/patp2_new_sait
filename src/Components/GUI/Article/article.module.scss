@@ -1,0 +1,203 @@
+@import "/src/Components/params.scss";
+
+/* Блок статьи */
+.article {
+    @include defaultBlock($Article_background-color, $Article_color);
+    @extend %Article_box-shadow;
+    text-align: start;
+    margin: 2em 10*$margin;
+    //min-width:auto;
+    position: relative;
+    overflow: hidden;
+    //border: none;
+
+    @media (max-width: $max-media-px) {
+        margin: 2em 0;
+    }
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+        color: $Article_color_dark;
+        @extend %Article_box-shadow_dark;
+    }
+}
+
+/* Заголовок статьи */
+.title {
+    margin: $margin;
+    position: relative;
+    padding-right: 2em;
+    background-color: transparent;
+}
+
+/* Кнопка разворачивания контента */
+.expandButton {
+    @include defaultButton($Article_background-color, $Article_color);
+    font-size: 0.9em;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0.7em;
+    transform: translateY(-50%);
+    width: 1.5em;
+    height: 1.5em;
+
+    &::after,
+    &::before {
+        content: " ";
+        position: absolute;
+        border-bottom: 2px solid $Article_color;
+        width: 0.5em;
+        left: 50%;
+        transform: translateX(-50%);
+        @extend %transition;
+    }
+
+    &.active {
+        border: none;
+        background-color: $activeExpandButton_bcg-color;
+
+        &::after {
+            transform: translateX(-50%) rotate(90deg);
+        }
+
+        &::after,
+        &::before {
+            border-color: $activeExpandButton_color;
+        }
+
+        &:hover {
+            background-color: $activeExpandButton_bcg-color-hover;
+
+            &::after,
+            &::before {
+                border-color: $activeExpandButton_color-hover;
+            }
+        }
+    }
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+        @include borderHighlighting_dark($Article_background-color_dark);
+
+        &:hover {
+            background-color: lighten($Article_background-color_dark, 10%);
+        }
+
+        &::after,
+        &::before {
+            border-bottom: 2px solid $Article_color_dark;
+        }
+
+        &.active {
+            background-color: $activeExpandButton_bcg-color_dark;
+            border: none;
+    
+            &::after,
+            &::before {
+                border-color: $activeExpandButton_color_dark;
+            }
+    
+            &:hover {
+                background-color: $activeExpandButton_bcg-color-hover_dark;
+    
+                &::after,
+                &::before {
+                    border-color: $activeExpandButton_color-hover_dark;
+                }
+            }
+        }
+    }
+}
+
+/* Блок с контентом */
+.contentBlock {
+    overflow: hidden;
+    position: relative;
+    transition: height $transition, max-height $transition;
+}
+
+/* Контентом */
+.content {
+    margin-top: 3*$margin;
+    margin-bottom: 2*$margin;
+    //padding: 0.5em 0;
+    position: relative;
+    overflow: hidden;
+    transition: height $transition, max-height $transition;
+
+    //@include scrollbar($Article_background-color, darken($Article_background-color, 20%));
+}
+
+/* Кнопка "Раскрыть" */
+.showContentButton {
+    @include defaultButton($Article_background-color, $Article_color);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em;
+
+    padding-right: calc($padding-horizontal + 1.2em);
+
+    &::after {
+        content: " ";
+        position: absolute;
+        width: 0.45em;
+        height: 0.45em;
+        border-left: 0.15em solid $Article_color;
+        border-bottom: 0.15em solid $Article_color;
+        border-radius: 1px;
+        transform: translateY(0.125em) rotate(-45deg);
+        right: 1em;
+        top: 0.5em;
+        @extend %transition;
+    }
+
+    &.active {
+        &::after {
+            transform: translateY(0.4em) rotate(135deg);
+        }
+    }
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+        color: $Article_color_dark;
+        @include borderHighlighting_dark($Article_background-color_dark);
+
+        &::after {
+            border-color: $Article_color_dark;
+        }
+
+        &:hover {
+            @include bcgColorHighlighting_dark($Article_background-color_dark);
+            @include colorHighlighting_dark($Article_color_dark);
+        }
+    }
+}
+
+// Блок с кнопкой
+.showContentButtonDiv {
+    @extend %transition;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $Article_background-color;
+    transition: $transition;
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+    //border-top: 1px solid darken($Article_background-color, 10%);
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+    }
+}
+
+// Вспомогательный класс блока с кнопкой
+.setBcg {
+    @extend %transition;
+    background-color: $Article_background-color;
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+    }
+}

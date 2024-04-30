@@ -1,0 +1,17 @@
+@import "/src/Components/params.scss";
+
+/* Фоновое изображение */
+.headerBcgImage {
+    background-image: url("/public/img/header.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-radius: $border-radius;
+    box-shadow:  0 0 20px 20px $background-color inset;
+    width: 100%;
+    height: 100%;
+
+    & > img {
+        max-width: 100%;
+    }
+}

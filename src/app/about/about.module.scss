@@ -1,0 +1,9 @@
+@import "@/Components/params.scss";
+
+.historyList {
+    margin: 0 5*$margin;
+    
+    @media (max-width: $max-media-px) {
+        margin: 0 2.3*$margin;
+    }
+}

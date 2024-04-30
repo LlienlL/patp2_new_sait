@@ -1,0 +1,27 @@
+@import "/src/Components/params.scss";
+/* Параграф */
+.p {
+    text-indent: 2em;
+    margin: $margin;
+    display: block; //default
+    line-height: 1.3em;
+
+    * { // Не распространять отступ на дочерние элементы
+        text-indent: 0;
+    }
+}
+
+// Без отступа первой стрки:
+.noIndent {
+    text-indent: 0;
+}
+
+// Линейный дисплей:
+.inline {
+    display: inline;
+}
+
+// Текст по центру:
+.centerText {
+    text-align: center;
+}

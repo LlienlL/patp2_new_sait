@@ -1,0 +1,36 @@
+@import "/src/Components/params.scss";
+
+/* Контейнер */
+.map {
+    @include defaultBlock($Article_background-color, $Article_color);
+    display: block;
+    overflow: scroll;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    width: max-content;
+    cursor: grab;
+
+    & > img {
+        border-radius: $border-radius;
+    }
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 0;
+        height: 0;
+        transition: 0s;
+    }
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+
+        @include borderHighlighting_dark($Article_background-color_dark);
+    }
+
+    /* Убрать границы */
+    &.noBorder {
+        border: none;
+    }
+}

@@ -1,0 +1,11 @@
+@import "@/Components/params.scss";
+
+.img {
+    display: block;
+
+    @media (max-width: $max-media-px) {
+        width: 100%;
+        min-width: 200px;
+        height: auto;
+    }
+}

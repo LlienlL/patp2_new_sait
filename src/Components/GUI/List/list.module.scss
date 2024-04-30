@@ -1,0 +1,13 @@
+@import "/src/Components/params.scss";
+
+/* Список */
+.list {
+    margin: $margin 0 $margin $margin;
+    list-style-position: inside;
+}
+
+/* Элемент списка  */
+.item {
+    list-style-type: none;
+    margin: $margin 0;
+}

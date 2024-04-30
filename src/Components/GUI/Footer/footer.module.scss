@@ -1,0 +1,12 @@
+@import "/src/Components/params.scss";
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: fit-content; //
+    background-color: $Footer_bcg-color;
+    color: $Footer_color;
+    margin-top: 5*$margin;
+    border: none;
+}

@@ -1,0 +1,35 @@
+@import "/src/Components/params.scss";
+
+/* Картинка */
+.img {
+    border-radius: $border-radius;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Линейный дисплей */
+.inline {
+    display: inline-block;
+}
+
+// Внешний блок
+.div {
+    @extend %transition;
+    padding: $padding-vertical;
+    border-radius: $border-radius;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    height: auto;
+}
+
+// Отобразить рамку
+.setBorder {
+    @include borderHighlighting($Article_background-color);
+
+    
+    &:global(.dark) {
+        @include borderHighlighting_dark($Article_background-color_dark);
+    }
+}

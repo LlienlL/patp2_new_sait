@@ -1,0 +1,49 @@
+@import-normalize;
+@import "../Components/params.scss";
+
+/* Resets: */
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    list-style-type: none;
+    outline: none;
+
+    &:active,
+    &:focus,
+    &:visited {
+        outline: none;
+    }
+}
+
+#detach-button-host { // Удаление лишней кнопки RGX у Opera
+    display: none !important;
+}
+
+/* Main: */
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, Helvetica, sans-serif; //cursive прикольный
+    font-size: 16px;
+    color: $color;
+}
+
+body {
+    //background-color: $body_background-color;
+    background-color: $body_background-color;
+    //background-repeat: repeat;
+
+    @extend %transition;
+    z-index: 1;
+    @include scrollbar($body_background-color, $body_thumb-color);
+
+    & main {
+        min-height: 100vh;
+    }
+
+    &.dark {
+        background-color: $body_background-color_dark;
+
+        @include scrollbar($body_background-color_dark, $body_thumb-color_dark);
+    }
+}

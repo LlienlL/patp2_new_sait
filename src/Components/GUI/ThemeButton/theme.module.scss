@@ -1,0 +1,78 @@
+@import "/src/Components/params.scss";
+
+.themeButton {
+    @include defaultButton($NavMenuButton_background-color, $NavMenuButton_color);
+    background-color: #c1e7ed;
+    position: absolute;
+    top: 1em;
+    right: 2em;
+    border: none;
+    border-radius: 10em;
+    padding: 0.3em 0.3em;
+    width: 4.5em;
+    transform: scale(0.8);
+
+    &:hover {
+        background-color: #c1e7ed;
+        color: inherit;
+
+        /* .svg {
+            transform: scale(1.2);
+            box-shadow: 0 0 7px 3px #fab876;
+        } */
+
+        .check {
+            transform: scale(1.2);
+            box-shadow: 0 0 5px 2px #fab876;
+        }
+    }
+
+    .svg {
+        height: 2em;
+        width: 2em;
+        border-radius: 50%;
+        transition: box-shadow $transition, transform $transition;
+    }
+
+    .svgSun {
+        path {
+            fill:#fab876;
+        }
+    }
+
+    /* .svgMoon {} */
+
+    // Toggler:
+    .check {
+        position: relative;
+        height: 2em;
+        width: 2em;
+        border-radius: 50%;
+        transform: translateX(0em);
+        box-shadow: none;
+        transition: transform $transition cubic-bezier(.54, 1.60, .5, 1), box-shadow $transition;
+    }
+
+    &:global(.dark) {
+        background-color: #333533;
+
+        .check {
+            transform: translateX(1.9em); // Нужно рассчитать
+        }
+
+        &:hover {
+            .check {
+                transform: scale(1.2)  translateX(1.6em); // Нужно рассчитать
+                box-shadow: 0 0 5px 2px #90C8EC;
+            }
+            /* .svg {
+                box-shadow: 0 0 5px 2px #90C8EC; //#578CAD
+            }*/
+        } 
+    }
+
+    @media (max-width: $max-media-px) {
+        transform: scale(1);
+    }
+    
+}

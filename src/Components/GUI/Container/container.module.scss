@@ -1,0 +1,60 @@
+@import "/src/Components/params.scss";
+
+/* Контейнер */
+.container {
+    @include defaultBlock($Article_background-color, $Article_color);
+    text-align: start; // important
+    display: block;
+    overflow: scroll;
+    box-sizing: border-box;
+
+    @include scrollbar($Article_background-color, darken($Article_background-color, 20%));
+
+    &:global(.dark) {
+        background-color: $Article_background-color_dark;
+        color: $Article_color_dark;
+
+        @include borderHighlighting_dark($Article_background-color_dark);
+        @include scrollbar($Article_background-color_dark, lighten($Article_background-color_dark, 20%));
+    }
+
+    /* Убрать границы */
+    &.noBorder {
+        border: none;
+    }
+
+    /* Убрать внутренние отступы */
+    &.noPadding {
+        padding: 0;
+    }
+
+    /* Убрать внешние отступы */
+    &.noMargin {
+        margin: 0;
+    }
+
+    /* Центрировать дочерние элементы */
+    &.centerChildren {
+        text-align: center;
+
+        &>* {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Без скролла контента */
+    &.noScrollContent {
+        overflow: hidden;
+    }
+
+    &.noCentering {
+        &>* {
+            // Убираем центрирование
+            position: static;
+            transform: none;
+        }
+    }
+
+}

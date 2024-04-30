@@ -1,0 +1,149 @@
+@import "/src/Components/params.scss";
+
+/* Файл-блок */
+.fileBlock {
+    @include defaultBlock($FileBlock_background-color, $FileBlock_color);
+    display: inline-block;
+    text-align: start;
+    width: max-content;
+    color: $FileBlock_color;
+    padding: 0.6em 1.2em 0.6em 1em;
+    margin: 0.5em;
+
+    a {
+        display: inline-block;
+        color: $FileBlock_color;
+    }
+
+    &:global(.dark) {
+        background-color: $FileBlock_background-color_dark;
+        color: $FileBlock_color_dark;
+        @include borderHighlighting_dark($FileBlock_background-color_dark);
+    }
+}
+
+/* Ссылочная строка  */
+.a {
+    padding: 0.4em 0.7em;
+    border-radius: 0.3em;
+    @extend %transition;
+
+    &:hover {
+        @include bcgColorHighlighting($FileBlock_background-color);
+        @include colorHighlighting($FileBlock_color);
+    }
+
+    // Иконка типа файла:
+    img {
+        width: 1em;
+        height: 1em;
+        margin-right: 0.7em;
+        display: inline-block;
+        transform: translateY(0.07em) scale(1.5);
+    }
+
+    &:global(.dark) {
+        background-color: $FileBlock_background-color_dark;
+        color: $FileBlock_color_dark;
+
+        &:hover {
+            @include bcgColorHighlighting_dark($FileBlock_background-color_dark);
+            @include colorHighlighting_dark($FileBlock_color_dark);
+        }
+    }
+
+    /* &:visited {
+        color:blueviolet;
+    } */
+}
+
+/* Ссылочный блок с svg внутри  */
+.aSvg {
+    margin: 0 0 0 0.8em;
+    padding: 0.2em;
+    border-radius: 0.3em;
+    @extend %transition;
+    transform: scale(1.3);
+
+    // svg картинка (download и view):
+    .svg {
+        width: 1.2em;
+        height: 1em;
+        display: inline-block;
+        transform: translateY(0.07em);
+
+        * {
+            stroke: $FileBlock_color; // Цвет обводки (downloadSvg = весь цвет svg)
+            transition: stroke $transition, fill $transition;
+        }
+    }
+
+    // view svg картинка:
+    .svgView {
+        * {
+            stroke-width: 0px; // Обнуление толщины штриховки
+            fill: $FileBlock_color;
+            transform: scale(1.3);
+        }
+    }
+
+    &:hover {
+        @include bcgColorHighlighting($FileBlock_background-color);
+
+        .svg {
+            * {
+                stroke: $FileBlock_color;
+            }
+        }
+
+        .svgView {
+            * {
+                fill: $FileBlock_color;
+            }
+        }
+    }
+
+    &:global(.dark) {
+        .svg {
+            * {
+                stroke: $FileBlock_color_dark; // Цвет обводки (downloadSvg = весь цвет svg)
+            }
+
+        }
+
+        // view svg картинка:
+        .svgView {
+            * {
+                fill: $FileBlock_color_dark;
+            }
+        }
+
+        &:hover {
+            @include bcgColorHighlighting_dark($FileBlock_background-color_dark);
+
+            .svg {
+                * {
+                    stroke: lighten($FileBlock_color_dark, 10%);
+                }
+            }
+
+            .svgView {
+                * {
+                    fill: lighten($FileBlock_color_dark, 10%);
+                }
+            }
+        }
+    }
+}
+
+// Файл-блок без выделенного контейнера
+.notBlockyFile {
+    background-color: transparent;
+    border: none;
+    margin: 0.5em;
+    padding: 0;
+
+    &:global(.dark) {
+        border: none;
+    }
+}

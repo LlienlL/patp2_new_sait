@@ -1,0 +1,72 @@
+@import "/src/Components/params.scss";
+
+/* Ссылка */
+.anchor {
+    @extend %transition;
+    border-radius: $border-radius;
+    color: $Anchor_color;
+    padding: 0.2em 0.3em;
+
+
+    /* svg */
+    .svg {
+        width: 1.2em;
+        height: 1em;
+        display: inline-block;
+        transform: translateY(0.13em);
+
+        & * { // Цвет svg
+            transition: stroke $transition;
+            stroke: $Anchor_color;
+        }
+    }
+
+    // Ссылка была посещена
+    &:visited {
+        color: $Anchor_color-visited;
+
+        .svg {
+            & * {
+                stroke: $Anchor_color-visited;
+            }
+        }
+    }
+
+    &:hover {
+        color: $Anchor_color-hover;
+        background-color: darken($Article_background-color, 10%);
+        
+        > .svg {
+            > * {
+                stroke: $Anchor_color-hover;
+            }
+        }
+    }
+
+    &:global(.dark) {
+        &:hover { 
+            color: $Anchor_color-hover_dark;
+            background-color: lighten($Article_background-color_dark, 5%);
+
+            > .svg {
+                > * { // Цвет svg
+                    stroke: $Anchor_color-hover_dark;
+                }
+            }
+        }
+    }
+}
+
+// Показать границы
+.setBorder {
+    @include borderHighlighting($Article_background-color);
+
+    &:global(.dark) {
+        @include borderHighlighting_dark($Article_background-color_dark);
+    }
+}
+
+// Курсив
+.setItalic {
+    font-style: italic;
+}

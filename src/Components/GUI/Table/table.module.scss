@@ -1,0 +1,103 @@
+@import "/src/Components/params.scss";
+
+/* Блок таблицы */
+.table {
+    @include defaultBlock($Table_background-color, $Table_color);
+    padding: 0;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: 0 0 0 1px $Table_border-color;
+
+    @media (max-width: $max-media-px) {
+        font-size: 15px;
+    }
+
+    /* Строка таблицы */
+    tr {
+        transition: background-color $transition;
+
+        /* Ячейка таблицы */
+        td,
+        th {
+            transition: background-color $transition;
+            padding: $padding-vertical $padding-horizontal;
+
+            @media (max-width: $max-media-px) {
+                padding: $padding-vertical $padding-vertical;
+            }
+        }
+    }
+
+    &:global(.dark) {
+        background-color: $Table_background-color_dark;
+        color: $Table_color_dark;
+        box-shadow: 0 0 0 1px $Table_border-color_dark;
+    }
+
+}
+
+/* Границы внутри таблицы */
+.borderedInner {
+    td,
+    th {
+        border: 1px solid $Table_border-color;
+    }
+
+    &:global(.dark) {
+        td,
+        th {
+            border: 1px solid $Table_border-color_dark;
+        }
+    }
+}
+
+/* Плитчатый фон */
+.tiledBackground {
+    tr {
+        &:nth-child(even) {
+            background-color: darken($Table_background-color, 2.5%);
+
+            td:nth-child(even),
+            th:nth-child(even) {
+                background-color: darken($Table_background-color, 5%);
+            }
+        }
+
+        td,
+        th {
+            &:nth-child(even) {
+                background-color: darken($Table_background-color, 2.5%);
+            }
+        }
+    }
+
+    &:global(.dark) {
+        tr {
+            &:nth-child(even) {
+                background-color: lighten($Table_background-color_dark, 2.5%);
+    
+                td:nth-child(even),
+                th:nth-child(even) {
+                    background-color: lighten($Table_background-color_dark, 5%);
+                }
+            }
+    
+            td,
+            th {
+                &:nth-child(even) {
+                    background-color: lighten($Table_background-color_dark, 2.5%);
+                }
+            }
+        }
+    }
+}
+
+/* Подпись */
+.caption {
+    margin: $margin;
+    font-style: italic;
+
+    &.bottomCaption {
+        caption-side: bottom;
+    }
+}

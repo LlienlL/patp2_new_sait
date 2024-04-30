@@ -1,0 +1,289 @@
+/* Переменные, определяющие некоторые стили контента. Переменные цветов можно изменять как угодно, 
+остальные переменные при изменении требуют проверки, т.к. могут нарушить позиционирование контента */
+
+/* Основные цвета: */
+$color-1: #FFFFFF;
+$color-2: #E5E5E5;
+$color-3: #FCA311;
+$color-4: #14213D;
+$color-5: #000000;
+
+$color-6: #cfdbd5;
+$color-7: #e8eddf;
+$color-8: #f5cb5c;
+$color-9: #242423;
+$color-10: #333533;
+
+$color-11: #3c6e71;
+$color-12: #284b63;
+$color-13: #274c77;
+$color-14: #6096ba;
+$color-15: #4a4e69;
+
+$color-16: #fffcf2;
+$color-17: #ccc5b9;
+$color-18: #403d39;
+
+/* Основные параметры */
+$background-color: #FFFFFF;
+$color: #14213D;
+$border-radius: 0.4em;
+$transition: 0.5s;
+$padding-horizontal: 1em;
+$padding-vertical: 0.5em;
+$margin: 0.5em;
+$max-media-px: 1000px;
+
+$color_dark: #e8eddf;
+
+$defaultButton_background-color: #E5E5E5;
+
+%transition {
+    transition: background-color $transition, color $transition, transform $transition, border $transition, box-shadow $transition;
+}
+
+@mixin bcgColorHighlighting($bcg-color) {
+    background-color: #E5E5E5;
+}
+
+@mixin colorHighlighting($color) {
+    color: #000000;
+}
+
+@mixin borderHighlighting($bcg-color) {
+    border: 1px solid darken($bcg-color, 10%);
+}
+
+@mixin bcgColorHighlighting_dark($bcg-color) {
+    background-color: lighten($bcg-color, 10%);
+}
+
+@mixin colorHighlighting_dark($color) {
+    color: lighten($color, 10%);
+}
+
+@mixin borderHighlighting_dark($bcg-color) {
+    border: 1px solid lighten($bcg-color, 10%);
+}
+
+@mixin defaultButton($bcg-color, $text-color) {
+    @include borderHighlighting($bcg-color);
+    cursor: pointer;
+    background-color: $bcg-color;
+    color: $text-color;
+    padding: $padding-vertical $padding-horizontal;
+    margin: $margin;
+    text-align: center;
+    border-radius: $border-radius;
+    @extend %transition;
+
+    &:hover {
+        @include bcgColorHighlighting($bcg-color);
+        @include colorHighlighting($color);
+    }
+}
+
+@mixin defaultBlock($bcg-color, $text-color) {
+    @include borderHighlighting($bcg-color);
+    background-color: $bcg-color;
+    color: $text-color;
+    padding: $padding-vertical $padding-horizontal;
+    margin: $margin;
+    text-align: center;
+    border-radius: $border-radius;
+    @extend %transition;
+}
+
+@mixin scrollbar($bcg-color, $thumb-color) {
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 15px;
+        transition: 0s;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $thumb-color;
+        border-radius: 6px;
+        border: 3px solid $bcg-color;
+        transition: 0s;
+
+        &:hover {
+            background-color: lighten($thumb-color, 10%);
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}
+
+/* Основная страница */
+$body_background-color: darken($background-color, 2.5%);
+$body_thumb-color: #f5cb5c;
+
+$body_background-color_dark: darken(#333533, 3%);
+$body_thumb-color_dark: #f5cb5c;
+
+/* Статья  */
+$Article_background-color: #FFFFFF; //#f7f7f7
+$Article_color: $color;
+
+$Article_background-color_dark: #333533;
+$Article_color_dark: $color_dark;
+
+
+%Article_box-shadow {
+    box-shadow: 0 0 7px 3px #E5E5E5;
+}
+
+%Article_box-shadow_dark {
+    box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #333533;
+}
+
+$activeExpandButton_bcg-color: #6096ba;
+$activeExpandButton_color: #FFFFFF;
+$activeExpandButton_bcg-color-hover: #274c77;
+$activeExpandButton_color-hover: #E5E5E5;
+
+$activeExpandButton_bcg-color_dark: #274c77;
+$activeExpandButton_color_dark: #FFFFFF;
+$activeExpandButton_bcg-color-hover_dark: #6096ba;
+$activeExpandButton_color-hover_dark: #E5E5E5;
+
+/* Таблица */
+$Table_background-color: $Article_background-color;
+$Table_color: $Article_color;
+$Table_border-color: darken($Table_background-color, 30%);
+
+$Table_background-color_dark: $Article_background-color_dark;
+$Table_color_dark: $Article_color_dark;
+$Table_border-color_dark: lighten($Table_background-color_dark, 30%);
+
+/* Файл-блок */
+$FileBlock_background-color: $Article_background-color;
+$FileBlock_color: $color;
+
+$FileBlock_background-color_dark: $Article_background-color_dark;
+$FileBlock_color_dark: $color_dark;
+
+/* Ссылка */
+$Anchor_color: rgb(187, 0, 255);
+$Anchor_color-hover: darken($Anchor_color, 35%);
+$Anchor_color-hover_dark: lighten($Anchor_color, 35%);
+$Anchor_color-visited: rgb(187, 0, 255);
+
+/* Меню навигации */
+$NavWrapButton_background-color: #3c6e71;
+$NavWrapButton_color: #E5E5E5;
+
+$NavMenu_background-color: #3c6e71;
+
+$NavMenuButton_background-color: #3c6e71;
+$NavMenuButton_color: #E5E5E5;
+
+$NavWrapButton_background-color_dark: #4a4e69;
+$NavWrapButton_color_dark: $color_dark;
+
+$NavMenu_background-color_dark: #4a4e69;
+
+$NavMenuButton_background-color_dark: #4a4e69;
+$NavMenuButton_color_dark: $color_dark;
+
+@mixin NavWrapButton {
+    @include defaultButton($NavWrapButton_background-color, $NavWrapButton_color);
+    border: none;
+    box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to left, $NavWrapButton_background-color,
+            lighten($NavWrapButton_background-color, 10%), $NavWrapButton_background-color);
+    background-size: 400%;
+    transition: $transition;
+
+    &:hover {
+        color: $NavMenuButton_color;
+        background-position: right;
+    }
+
+    // Активное состояние кнопки:
+    &.wrapButtonActive {
+        box-shadow: none;
+        border: 1px solid #E5E5E5;
+        //background: none;
+
+        &:hover {
+            background-color: darken($NavWrapButton_background-color, 10%);
+        }
+    }
+
+    &:global(.dark) {
+        color: $NavWrapButton_color_dark;
+        background: linear-gradient(to left, $NavWrapButton_background-color_dark,
+                lighten($NavWrapButton_background-color_dark, 10%), $NavWrapButton_background-color_dark);
+        background-size: 400%;
+
+        &:hover {
+            background-position: right;
+        }
+    }
+}
+
+@mixin NavMenu {
+    //transition: background-color $transition;
+    background-color: $NavMenu_background-color;
+    //border: 2px solid lighten($NavMenu_background-color, 10%);
+    box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.3);
+
+    &:global(.dark) {
+        background-color: $NavMenu_background-color_dark;
+        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@mixin NavMenuButton {
+    @include defaultButton($NavMenuButton_background-color, $NavMenuButton_color);
+    transition: background-color $transition, color $transition, transform $transition, border $transition;
+    border: 1px solid transparent;
+
+    &:hover {
+        background-color: darken($NavMenuButton_background-color, 10%);
+        color: $NavMenuButton_color;
+    }
+
+    &.active {
+        background-color: $NavMenuButton_color;
+        color: $NavMenuButton_background-color;
+    }
+
+    &:has(.a.active) {
+        border-color: #E5E5E5;
+    }
+
+    @media (max-width: $max-media-px) {
+        border: 1px solid #E5E5E5;
+    }
+
+    &:global(.dark) {
+        color: $NavMenuButton_color_dark;
+        background-color: $NavMenuButton_background-color_dark;
+
+        &:hover {
+            background-color: darken($NavMenuButton_background-color_dark, 10%);
+            color: $NavMenuButton_color_dark;
+        }
+
+        &.active {
+            background-color: $NavMenuButton_color_dark;
+            color: $NavMenuButton_background-color_dark;
+        }
+
+        &:has(.a.active) {
+            border-color: $NavMenuButton_color_dark;
+        }
+    }
+}
+
+
+
+/* Футер */
+$Footer_bcg-color: #4a4e69;
+$Footer_color: $color_dark;

@@ -1,0 +1,320 @@
+@import "/src/Components/params.scss";
+
+/* Секция с  меню навигации и кнопкой, разворачивающей это меню */
+.section {
+    position: fixed;
+    width: 100vw;
+    height: auto;
+    z-index: 9000;
+    font-size: 17px;
+}
+
+/* Кнопка для развёртывания меню навигации */
+$wrapButton_arrow_border-width: 2px;
+
+.wrapButton {
+    @include NavWrapButton;
+    display: inline-block;
+    position: fixed;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 9002;
+    padding: 3em 2em 0.75em 2em;
+    margin: 0px;
+    border-radius: 35%;
+    font-size: 20px;
+
+    &::after,
+    &::before {
+        content: " ";
+        position: absolute;
+        width: 0.5em;
+        height: 0.5em;
+        border-left: $wrapButton_arrow_border-width solid $NavWrapButton_color;
+        border-bottom: $wrapButton_arrow_border-width solid $NavWrapButton_color;
+        border-radius: 15%;
+        transform: translate(-50%, -250%) rotate(-45deg);
+        left: 50%;
+        @extend %transition;
+    }
+
+    &:hover {
+        transform: translateY(-40%);
+
+        &::after {
+            transform: translate(-50%, -120%) rotate(-45deg);
+        }
+
+        &::before {
+            transform: translate(-50%, -190%) rotate(-45deg);
+        }
+    }
+
+    // Активное состояние кнопки:
+    &.wrapButtonActive {
+        transform: translateY(-40%);
+
+        &::after {
+            transform: translate(-50%, -50%) rotate(135deg);
+        }
+
+        &::before {
+            transform: translate(-50%, -120%) rotate(135deg);
+        }
+    }
+}
+
+/* Блок с кнопками навигации */
+$NavMenu_translateY: 0px;
+$NavMenu_translateX: 0px;
+
+.nav {
+    @include NavMenu;
+    width: 100%;
+    //padding: 15px 205px 15px calc(20px + 10em);
+    margin: 0px;
+    position: absolute;
+    //top: 0px;
+    z-index: 9000;
+
+    @media (max-width: $max-media-px) {
+        width: max-content;
+        height: auto;
+        left: 0px;
+        padding: 70px 5px 15px 5px;
+        border-bottom-right-radius: $border-radius;
+    }
+}
+
+/* Список кнопок, их сортировка и позиционирование */
+.ul {
+    margin: 10px calc(6.5em + 5px) 10px calc(20px + 10em);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @media (max-width: $max-media-px) {
+        margin: 0;
+        height: inherit;
+        max-width: 90vw;
+        max-height: 80vh;
+        min-width: fit-content;
+        display: block;
+        padding-right: 0.5em;
+        overflow: scroll;
+
+        @include scrollbar($NavMenuButton_background-color, lighten($NavMenuButton_background-color, 10%));
+    }
+
+    &:global(.dark) {
+        @media (max-width: $max-media-px) {
+            @include scrollbar($NavMenuButton_background-color_dark,  lighten($NavMenuButton_background-color_dark, 10%));
+        }
+    }
+
+}
+
+/* Кнопка меню навигации */
+.li {
+    width: initial;
+    padding: 0;
+    margin: $margin;
+}
+
+/* Ссылка меню навигации */
+.a {
+    @include NavMenuButton;
+    margin: 0px;
+    display: inline-block;
+    text-wrap: wrap;
+}
+
+/* Кнопка навигации с выпадающим списком */
+$wrapLi_arrow_border-width: 2px;
+
+.wrapLi {
+    @include NavMenuButton;
+    cursor: default;
+    position: relative;
+    padding-right: calc($padding-horizontal + 1.2em);
+
+    &::after,
+    &::before {
+        content: " ";
+        position: absolute;
+        width: 0.4em;
+        height: 0.4em;
+        border-left: $wrapLi_arrow_border-width solid $NavWrapButton_color;
+        border-bottom: $wrapLi_arrow_border-width solid $NavWrapButton_color;
+        border-radius: 15%;
+        transform: translateY(0.25em) rotate(-45deg);
+        right: 1em;
+        top: 0.5em;
+        @extend %transition;
+    }
+
+    &:hover {
+        &::after {
+            transform: translateY(0.5em) rotate(-45deg);
+        }
+
+        &::before {
+            transform: translateY(0em) rotate(-45deg);
+        }
+    }
+
+    @media (max-width: $max-media-px) {
+        border: none; // !!!
+        background-color: $NavMenuButton_background-color;
+        text-align: start;
+        padding: 0.5em 1em;
+
+        &::after, &::before {
+            content: none;
+        }
+        &:hover {
+            background-color: $NavMenuButton_background-color;
+            color: #E5E5E5;
+        }
+    }
+
+    &:global(.dark) {
+        @media (max-width: $max-media-px) {
+            &:hover {
+                background-color: $NavMenuButton_background-color_dark;
+            }
+        }
+    }
+
+    // Выпадающий список:
+    ul {
+        cursor: default;
+        z-index: 9001;
+        background-color: $NavMenu_background-color;
+        border-radius: $border-radius;
+        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.2);
+        width: max-content;
+        padding: 0.4em;
+        opacity: 0;
+        //display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        position: absolute;
+        transform: translate(-50%, calc($padding-vertical - 50%)) scaleY(0);
+        left: 50%;
+        @extend %transition;
+        animation: ulUnactive $transition ease 1 forwards;
+
+        &.toActive {
+            animation: ulActive $transition ease 1 forwards;
+        }
+
+        li {
+            margin: 0.1em 0.4em;
+        }
+
+        @media (max-width: $max-media-px) {
+            position: relative;
+            opacity: 1;
+            display: block;
+            width: auto;
+            padding: 0.5em 0;
+            left: 0%;
+            transform: scale(1);
+            box-shadow: none;
+            animation: none;
+
+            li {
+                margin: 0.5em 0 0 0;
+            }
+
+            &.toActive {
+                animation: none;
+            }
+        }
+
+        &:global(.dark) {
+            background-color: $NavMenuButton_background-color_dark;
+            color: $NavMenuButton_color_dark;
+
+            @media (max-width: $max-media-px) {
+                box-shadow: none;
+                animation: none;
+            }
+        }
+    }
+}
+
+
+/* ______________________________________   Анимации   ______________________________________ */
+
+/* Анимации для блока nav */
+.enter {
+    transform: translateX(0) translateY(-50vh);
+}
+
+.enterActive {
+    transform: translateX(0) translateY($NavMenu_translateY);
+    @extend %transition;
+}
+
+.exit {
+    transform: translateX(0) translateY($NavMenu_translateY);
+}
+
+.exitActive {
+    transform: translateX(0) translateY(-50vh);
+    @extend %transition;
+}
+
+@media (max-width: $max-media-px) {
+    .enter {
+        transform: translateX($NavMenu_translateX) translateY(-120%);
+    }
+
+    .enterActive {
+        transform: translateX($NavMenu_translateX) translateY($NavMenu_translateY);
+        @extend %transition;
+    }
+
+    .exit {
+        transform: translateX($NavMenu_translateX) translateY($NavMenu_translateY);
+    }
+
+    .exitActive {
+        transform: translateX($NavMenu_translateX) translateY(-120%);
+        @extend %transition;
+    }
+}
+
+/* Анимации для выпадающего списка */
+@keyframes ulUnactive {
+    from {
+        opacity: 1;
+        display: flex;
+        transform: translate(-50%, $padding-vertical) scaleY(1);
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+        transform: translate(-50%, calc($padding-vertical - 50%)) scaleY(0);
+    }
+}
+
+@keyframes ulActive {
+    from {
+        opacity: 0;
+        display: flex;
+        transform: translate(-50%, calc($padding-vertical - 50%)) scaleY(0);
+    }
+
+    to {
+        opacity: 1;
+        display: flex;
+        transform: translate(-50%, $padding-vertical) scaleY(1);
+    }
+}

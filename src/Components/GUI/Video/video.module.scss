@@ -1,0 +1,45 @@
+@import "/src/Components/params.scss";
+
+// Видео компонент
+.video {
+    border-radius: $border-radius;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+// Блок
+.block {
+    display: block;
+    border-radius: $border-radius;
+    padding: $padding-vertical;
+    margin: $margin;
+    transition: border $transition;
+    @include borderHighlighting($Article_background-color);
+    overflow: hidden;
+
+    &:global(.dark) {
+        @include borderHighlighting_dark($Article_background-color_dark);
+    }
+
+    &.inline {
+        display: inline-block;
+    }
+    &.noMargin {
+        margin: 0;
+    }
+    &.noPadding {
+        padding: 0;
+    }
+    &.noBorder {
+        border-color: transparent !important;
+    }
+
+    .captionOver {
+        text-align: center;
+        margin-bottom: $margin;
+    }
+    .captionUnder {
+        text-align: center;
+    }
+}

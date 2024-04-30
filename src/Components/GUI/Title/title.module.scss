@@ -1,0 +1,21 @@
+@import "/src/Components/params.scss";
+
+/* Заголовок h3 */
+.h3 {
+    text-indent: 2em;
+    margin: $margin;
+
+    * { // Не распространять отступ на дочерние элементы
+        text-indent: 0;
+    }
+}
+
+// Без отступа первой стрки:
+.noIndent {
+    text-indent: 0;
+}
+
+// Текст по центру:
+.centerText {
+    text-align: center;
+}
