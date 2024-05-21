@@ -1,3 +1,4 @@
+import React from 'react';
 import ListItem from "./ListItem";
 import style from "./list.module.scss";
 

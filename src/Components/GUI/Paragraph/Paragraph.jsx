@@ -1,3 +1,4 @@
+import React from 'react';
 import style from "./paragraph.module.scss";
 
 /** GUI Компонент. Параграф. Нужен для отображения текста, но может принимать компоненты. * - обязательные параметры:  

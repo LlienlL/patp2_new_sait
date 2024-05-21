@@ -1,3 +1,4 @@
+import React from 'react';
 import style from "./list.module.scss";
 
 /** GUI Компонент. Элемент списка. * - обязательные параметры:
@@ -6,17 +7,13 @@ import style from "./list.module.scss";
 • `noVerticalMargin` - убрать вертикальные внешние отступы */
 
 function ListItem({ children, marker, noVerticalMargin = false }) {
-    const styles = {
-        listStyleType: marker
-    }
-
-    if (noVerticalMargin) {
-        styles.marginTop = 0;
-        styles.marginBottom = 0;
-    }
+    const classNames = [
+        noVerticalMargin ? style.noVerticalMargin : '',
+        style.item
+    ].join(' ');
 
     return (
-        <li className={style.item} style={styles}>
+        <li className={classNames} data-marker={marker} style={{ listStyleType: marker }}>
             {children}
         </li>
     );
